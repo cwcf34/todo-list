@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app='todo'>
+<head>
+  <title>Todo List</title>
+    <!-- Loading Angular Js...... -->
+  <script type="text/javascript" src="js/lib/angular.min.js"></script>
+  <script type="text/javascript" src="js/app.js"></script>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+<!-- Contains App -->
+<body>
+  <div id="todo" ng-controller='ToDoCtrl'>
+
+  <!-- Input -->
+  <div id="additem">
+    <!-- Input Text Box -->
+    <input type="text" name="addtask" class='add task' placeholder="Add your next todo here" ng-model="taskName" ng-keyup="addTask()"/>
+    <!-- Priority Selector -->
+    <select ng-model="priority">
+      <option value='normal'>normal</option>
+      <option value='medium'>medium</option>
+      <option value='high'>high</option>
+    </select>
+  </div>
+
+  <!-- List Area -->
+  <ul id="todo-list">
+    <li ng-repeat="task in tasklist track by $index" ng-mouseenter="task.showdelete = true; item = 'focus'" ng-mouseleave="task.showdelete = false; item = 'nofocus'" ng-class='item'>
+      <input type="checkbox" name="checkbox" ng-model="task.completed"/>
+      <span class="completed-{{task.completed}}">{{task.name}}</span>
+      <span class="priority {{task.priority}}">{{task.priority}}</span>
+      <span class="delete" title="Delete Task" ng-show="task.showdelete" ng-click="deleteTask(tasklist.indexOf(task))"></span>
+    </li>
+    <li>
+      <span>You  have {{count}} task(s) to finish.</span>
+  </ul>
+
+  </div>
+
+  <!-- Script! -->
+</body>
+</html>
